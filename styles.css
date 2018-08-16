@@ -1,0 +1,12 @@
+.ratingSection {
+    width: 600px;
+    margin: 0 auto;
+    text-align:center;
+}
+.ratingSection textarea {
+    width:50%;
+    height:100px;
+}
+.ratingSection .checked {
+    color: orange;
+}
