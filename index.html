@@ -3,19 +3,34 @@
 <head>
     <title>Star Rating Using Vanilla JS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        .ratingSection {
+            width: 600px;
+            margin: 0 auto;
+            text-align:center;
+        }
+        .ratingSection textarea {
+            width:50%;
+            height:100px;
+        }
+        .ratingSection .star {
+            color: #d4b300;
+        }
+        .ratingSection .star:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="ratingSection">
         <h1>Write Your Review</h1>
         <div class="starRating">
             <label for="">Rating:</label>
-            <span id="star1" class="star fa fa-star-o checked"></span>
+            <span id="star1" class="star fa fa-star-o"></span>
             <span id="star2" class="star fa fa-star-o"></span>
             <span id="star3" class="star fa fa-star-o"></span>
             <span id="star4" class="star fa fa-star-o"></span>
             <span id="star5" class="star fa fa-star-o"></span>
-
         </div>
         <div class="review">
             <textarea name="" id="">Review</textarea>
@@ -27,9 +42,8 @@
 
     <script type="text/javascript">
         let stars = document.getElementsByClassName("star");
-        // console.log(star);
-        for (var i = stars.length - 1; i >= 0; i--) {
-            var star = stars[i];
+        for (let i = stars.length - 1; i >= 0; i--) {
+            let star = stars[i];
             star.addEventListener("mouseenter", function(e) {
                 changeStarColor(e);
             });
@@ -41,10 +55,28 @@
         changeStarColor = (event) => {
             let element = document.getElementById(event.target.id);
             let starId = element.id;
-            console.log(starId);
+            starId = starId.split("star")[1];
+            starId = parseInt(starId);
+            let counter = 1;
+            while (counter <= starId) {
+                let colored = document.getElementById("star"+counter.toString());
+                let classes = colored.className.split(" ");
+                colored.classList.remove("fa-star-o");
+                if (classes.indexOf("fa-star") == -1) {
+                    colored.className += " fa-star";
+                }
+                counter++;
+            }
+            while (counter <= 5) {
+                let colored = document.getElementById("star"+counter.toString());
+                let classes = colored.className.split(" ");
+                colored.classList.remove("fa-star");
+                if (classes.indexOf("fa-star-o") == -1) {
+                    colored.className += " fa-star-o";
+                }
+                counter++;
+            }
         }
-
     </script>
-
 </body>
 </html>
